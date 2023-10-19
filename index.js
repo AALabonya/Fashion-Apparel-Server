@@ -50,7 +50,6 @@ app.get("/product/:id", async(req, res)=>{
 })
 app.post("/product", async(req, res)=>{
     const product = req.body 
-    console.log(product);
     const result = await fashionCollections.insertOne(product)
     res.send(result)
 })
@@ -75,22 +74,26 @@ app.put("/product/:id", async(req, res)=>{
   res.send(result)
 })
 
-
-
-
 app.get("/cart", async(req,res)=>{
   const cursor = addToCart.find()
   const result = await cursor.toArray()
   res.send(result)
 })
 
-
-
 app.post("/cart", async(req, res)=>{
   const cart = req.body 
   const result = await addToCart.insertOne(cart)
   res.send(result)
 })
+
+app.delete("/cart/:id", async(req, res)=>{
+  const id = req.params.id
+  console.log(id);
+  const query ={_id : new ObjectId( id)}
+  const result = await addToCart.deleteOne(query)
+  res.send(result)
+})
+
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
