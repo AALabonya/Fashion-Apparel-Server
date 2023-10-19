@@ -1,6 +1,7 @@
 const express = require("express")
 const cors =require("cors")
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const data= require("./data.json")
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const app = express()
 const port = process.env.PORT || 5000;
 
@@ -27,6 +28,48 @@ async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
+
+     const fashionCollections = client.db("fashionBrandDB").collection("fashionCollections")
+     const addToCart = client.db("fashionBrandDB").collection("addToCart")
+
+app.get("/brands", (req, res)=>{
+  res.send(data)
+})
+
+app.get("/product", async(req,res)=>{
+    const cursor = fashionCollections.find()
+    const result = await cursor.toArray()
+    res.send(result)
+})
+
+app.get("/product/:id", async(req, res)=>{
+    const id = req.params.id
+    const query = {_id : new ObjectId(id)}
+    const result = await fashionCollections.findOne(query)
+    res.send(result)
+})
+app.post("/product", async(req, res)=>{
+    const product = req.body 
+    console.log(product);
+    const result = await fashionCollections.insertOne(product)
+    res.send(result)
+})
+
+
+app.get("/cart", async(req,res)=>{
+  const cursor = addToCart.find()
+  const result = await cursor.toArray()
+  res.send(result)
+})
+
+
+
+app.post("/cart", async(req, res)=>{
+  const cart = req.body 
+  const result = await addToCart.insertOne(cart)
+  res.send(result)
+})
+
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
@@ -36,8 +79,6 @@ async function run() {
   }
 }
 run().catch(console.dir);
-
-
 
 
 app.get("/", (req,res)=>{

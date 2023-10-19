@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "name": "Nike",
+        "image": "https://i.ibb.co/yPGms4h/R.jpg",
+        "price": 99.99
+    },
+    {
+        "id": 2,
+        "name": "Adidas",
+        "image": "https://i.ibb.co/LQhQLZq/Adidas-Logo.jpg",
+        "price": 89.99
+    },
+    {
+        "id": 3,
+        "name": "Gucci",
+        "image": "https://i.ibb.co/B6mgb8h/R.png",
+        "price": 499.99
+    },
+    {
+        "id": 4,
+        "name": "Zara",
+        "image": "https://i.ibb.co/93GtSXR/R-1.jpg",
+        "price": 49.99
+    },
+    {
+        "id": 5,
+        "name": "H&M",
+        "image": "https://i.ibb.co/52SRBf3/HM-Logo-1968-1999.png",
+        "price": 29.99
+    },
+    {
+        "id": 6,
+        "name": "Levi's",
+        "image": "https://i.ibb.co/nM1ZdcG/51bd25674742790869c9347450371833.jpg",
+        "price": 69.99
+    }
+]
