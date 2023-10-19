@@ -55,6 +55,28 @@ app.post("/product", async(req, res)=>{
     res.send(result)
 })
 
+app.put("/product/:id", async(req, res)=>{
+  const id =req.params.id 
+  const products = req.body
+  console.log(id, products);
+  const filter = {_id : new ObjectId(id)}
+  const option ={upsert: true}
+  const updateProduct ={
+    $set:{
+      name:products.name,
+      image:products.image,
+      brand:products.brand,
+      type:products.type,
+      price:products.price,
+      rating:products.rating,
+    }
+  }
+  const result = await fashionCollections.updateOne(filter, updateProduct,option)
+  res.send(result)
+})
+
+
+
 
 app.get("/cart", async(req,res)=>{
   const cursor = addToCart.find()
